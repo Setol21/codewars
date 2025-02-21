@@ -10,9 +10,27 @@ def interpret(code):
             case current_element if board[y][x] in "0123456789":
                 stack.append(current_element)
             case "+":
-                stack.append(str(int(stack[-1])+int(stack[-2])))
+                stack.append(int(stack[-1])+int(stack[-2]))
                 stack.pop(-2)
                 stack.pop(-2)
+            case "-":
+                stack.append(int(stack[-1])-int(stack[-2]))
+                stack.pop(-2)
+                stack.pop(-2)
+            case "*":
+                stack.append(int(stack[-1])*int(stack[-2]))
+                stack.pop(-2)
+                stack.pop(-2)
+            case "/":
+                stack.append(round(int(stack[-1])/int(stack[-2])))
+                stack.pop(-2)
+                stack.pop(-2)
+            case "%":
+                stack.append(int(stack[-1])%int(stack[-2]))
+                stack.pop(-2)
+                stack.pop(-2)
+            case "!":
+                
             case ">":
                 direction = 1
             case "<":
@@ -30,7 +48,7 @@ def interpret(code):
                 x-=1
         
         current_element = board[y][x]
-    return stack
+    return "".join(stack)
 
-print(interpret(">25+@"))
+print(interpret(">25%@"))
 # print(interpret('>987v>.v\nv456<  :\n>321 ^ _@'))
